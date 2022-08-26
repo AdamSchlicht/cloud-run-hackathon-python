@@ -30,10 +30,13 @@ def index():
 
 @app.route("/", methods=['POST'])
 def move():
-    request.get_data()
-    logger.info(request.json)
-    logger.info(type(request.json))
-    return moves[random.randrange(len(moves))]
+    try:
+        request.get_data()
+        logger.info(request.json)
+        logger.info(type(request.json))
+        return moves[random.randrange(len(moves))]
+    except Exception:
+        logging.error("Nah not working")
 
 if __name__ == "__main__":
   app.run(debug=False,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
